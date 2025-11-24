@@ -1,0 +1,56 @@
+.autocuidado {
+  padding-bottom: 30px;
+  background: rgb(250, 230, 230);
+  text-align: center;
+}
+
+.titulo {
+  font-family: "Pacifico", cursive;
+  color: #db2777;
+  text-align: center;
+  padding-bottom: 0px;
+   
+}
+
+#tarjetas-container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 25px;
+  padding-top: 8px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Cada tarjeta */
+.card {
+  /* background: #ffdce4; */
+  border-radius: 20px;
+  border-width: 1px;
+  border-color: #da5f96;
+  padding: 25px 18px;
+  width: 350px;
+  color: #353535;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(31, 30, 30, 0.226);
+}
+
+.card img {
+  width: 100%;
+  padding-bottom: 6px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Título de la tarjeta */
+.card-title {
+  font-size: 22px;
+  font-family: "Pacifico", cursive;
+  color: #db2777;
+  margin-bottom: 10px;
+}
