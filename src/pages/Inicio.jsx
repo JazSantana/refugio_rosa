@@ -144,6 +144,11 @@ function Inicio() {
             <h4>MARINA SANTANA</h4>
             <p>Programadora</p>
           </div>
+          <div className="member">
+            <img src={mari} alt="" />
+            <h4>DAIRA CRUZ</h4>
+            <p>Diseñadora</p>
+          </div>
         </div>
       </section>
     </>
