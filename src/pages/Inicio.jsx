@@ -132,7 +132,7 @@ function Inicio() {
         </section>
       </main>
       <section className="team">
-        <h3>¿Quiénes somos?</h3>
+        <h3 className="qs">¿Quiénes somos?</h3>
         <div className="members">
           <div className="member">
             <img src={yei} alt="" />

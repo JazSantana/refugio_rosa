@@ -1,10 +1,11 @@
 .chat-container {
   background: rgb(250, 230, 230);
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   box-sizing: border-box;
 }
 
@@ -12,7 +13,7 @@
   background: #ffffff;
   border-radius: 25px;
   border-width: 1px;
-  border-color: #da5f96;
+  border-color: #f6b4d2;
   box-shadow: 0 8px 25px rgba(231, 84, 128, 0.2);
   padding: 30px;
   max-width: 700px;
