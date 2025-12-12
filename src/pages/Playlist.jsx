@@ -88,7 +88,7 @@ const Playlist = () => {
  
   return (
     <>
-          <h3 className="titulo"> ♫ Tu Refugio musical ♫ <br />
+          <h3 className="titulo"> Tu Refugio musical  <br />
           </h3>            
           <div className="subt">{"Canciones para sostenerte, reconectar y respirar bonito"}</div>
 
