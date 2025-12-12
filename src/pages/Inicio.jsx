@@ -5,6 +5,7 @@ import mood2 from "../assets/moodboard/mood2.jpg";
 import mood3 from "../assets/moodboard/mood3.jpg";
 import yei from "../assets/nosotras/yei.jpg";
 import mari from "../assets/nosotras/mari.jpg";
+import daira from "../assets/nosotras/daira.jpg";
 
 function Inicio() {
   const slidesData = [
@@ -145,7 +146,7 @@ function Inicio() {
             <p>Programadora</p>
           </div>
           <div className="member">
-            <img src={mari} alt="" />
+            <img src={daira} alt="" />
             <h4>DAIRA CRUZ</h4>
             <p>Diseñadora</p>
           </div>
