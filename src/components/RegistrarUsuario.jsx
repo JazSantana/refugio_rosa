@@ -10,70 +10,50 @@ function RegistrarUsuario({ OnRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [apodo, setApodo] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const registrar = async () => {
-    setError("");
-
     if (!email || !password || !apodo) {
-      setError("Completa todos los campos");
+      alert("Completa todos los campos");
       return;
     }
 
     if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
+      alert("La contraseña debe tener al menos 6 caracteres");
       return;
     }
 
     try {
-      setLoading(true);
       const auth = getAuth();
 
-      const userCredential = await createUserWithEmailAndPassword(
+      const cred = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      const user = userCredential.user;
-
-      await updateProfile(user, {
+      await updateProfile(cred.user, {
         displayName: apodo,
       });
 
-      await user.reload();
+      await cred.user.reload();
 
-      OnRegister?.(auth.currentUser);
+      OnRegister(auth.currentUser);
       navigate("/");
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        setError("Este correo ya está registrado");
-      } else if (error.code === "auth/invalid-email") {
-        setError("El correo no es válido");
-      } else {
-        setError("Error al registrar usuario");
-      }
-    } finally {
-      setLoading(false);
+      alert(error.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-rose-100 to-white p-6">
-      <div className="bg-white/70 backdrop-blur-sm shadow-xl rounded-2xl p-8 w-full max-w-md border border-pink-200 space-y-4">
-        <h1 className="text-3xl font-bold text-pink-600 text-center mb-4">
-          Registrar Usuario
+    <div className="min-h-screen flex items-center justify-center bg-pink-100 p-6">
+      <div className="bg-white rounded-2xl p-8 w-full max-w-md space-y-4">
+        <h1 className="text-2xl font-bold text-pink-600 text-center">
+          Crear cuenta
         </h1>
 
-        {error && (
-          <p className="text-red-500 text-sm text-center">{error}</p>
-        )}
-
         <input
-          className="w-full p-3 border border-pink-300 rounded-xl"
+          className="w-full p-3 border rounded-xl"
           type="text"
           placeholder="¿Cómo quieres que te llamemos?"
           value={apodo}
@@ -81,40 +61,27 @@ function RegistrarUsuario({ OnRegister }) {
         />
 
         <input
-          className="w-full p-3 border border-pink-300 rounded-xl"
+          className="w-full p-3 border rounded-xl"
           type="email"
-          placeholder="Escribe tu email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          className="w-full p-3 border border-pink-300 rounded-xl"
+          className="w-full p-3 border rounded-xl"
           type="password"
-          placeholder="Escribe tu contraseña"
+          placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
         <button
-          className={`w-full mt-4 text-white font-semibold py-3 rounded-xl transition
-            ${loading ? "bg-gray-400" : "bg-pink-500 hover:bg-pink-600"}
-          `}
+          className="w-full bg-pink-500 text-white py-3 rounded-xl"
           onClick={registrar}
-          disabled={loading}
         >
-          {loading ? "Creando cuenta..." : "Registrarse"}
+          Registrarse
         </button>
-
-        <div className="text-center mt-4">
-          <p className="text-gray-600 text-sm">¿Ya tienes una cuenta?</p>
-          <button
-            className="text-pink-500 hover:underline font-semibold mt-1"
-            onClick={() => navigate("/login")}
-          >
-            Iniciar sesión
-          </button>
-        </div>
       </div>
     </div>
   );

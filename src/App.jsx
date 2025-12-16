@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -15,12 +15,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
-  const navigate = useNavigate();
   const auth = getAuth();
+  const navigate = useNavigate();
 
-  // ⬅ Redirección automática si ya hay usuario logueado
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsuarioRegistrado(user);
       } else {
@@ -28,55 +27,57 @@ function App() {
       }
     });
 
-    return () => unsubscribe();
+    return () => unsub();
   }, [auth]);
 
   return (
     <>
       <Header usuario={usuarioRegistrado} />
+
       <Routes>
-        <Route path="/" element={<Inicio />} />
+        <Route path="/" element={<Inicio usuario={usuarioRegistrado} />} />
         <Route path="/chat" element={<Chat usuario={usuarioRegistrado} />} />
         <Route path="/autocuidado" element={<Autocuidado />} />
         <Route
           path="/pendiente"
           element={
-            <ProtectedRoute>
-            <Pendientes
-              usuarioData={usuarioRegistrado}
-              actualizarUsuario={setUsuarioRegistrado}
-            />
+            <ProtectedRoute usuario={usuarioRegistrado}>
+              <Pendientes />
             </ProtectedRoute>
           }
         />
         <Route path="/playlist" element={<Playlist />} />
 
-        {/* Login */}
-        <Route
-          path="/login"
-          element={
-            <Login
-              OnLogin={(userData) => {
-                setUsuarioRegistrado(userData);
-                navigate("/"); // Redirige automáticamente después de login
-              }}
-            />
-          }
-        />
+       <Route
+  path="/login"
+  element={
+    usuarioRegistrado ? <Inicio /> : (
+      <Login
+        OnLogin={(userData) => {
+          setUsuarioRegistrado(userData);
+          navigate("/");
+        }}
+      />
+    )
+  }
+/>
 
-        {/* Registro */}
-        <Route
-          path="/registrarse"
-          element={
-            <RegistrarUsuario
-              OnRegister={(userData) => {
-                setUsuarioRegistrado(userData);
-                navigate("/"); // Redirige automáticamente después de registro
-              }}
-            />
-          }
-        />
+<Route
+  path="/registrarse"
+  element={
+    usuarioRegistrado ? <Inicio /> : (
+      <RegistrarUsuario
+        OnRegister={(userData) => {
+          setUsuarioRegistrado(userData);
+          navigate("/");
+        }}
+      />
+    )
+  }
+/>
+
       </Routes>
+
       <Footer />
     </>
   );

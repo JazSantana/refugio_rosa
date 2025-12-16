@@ -1,4 +1,3 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import "./Inicio.css";
 
@@ -7,7 +6,6 @@ import mood2 from "../assets/moodboard/mood2.jpg";
 import mood3 from "../assets/moodboard/mood3.jpg";
 import yei from "../assets/nosotras/yei.jpg";
 import mari from "../assets/nosotras/mari.jpg";
-import daira from "../assets/nosotras/daira.jpg";
 
 function Inicio() {
   const slidesData = [
@@ -17,15 +15,15 @@ function Inicio() {
   ];
 
   const [current, setCurrent] = useState(0);
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const totalSlides = slidesData.length;
 
-  const [mostrarMensaje, setMostrarMensaje] = useState(false);
+  useEffect(() => {
+    if (sessionStorage.getItem("mensajeBienvenida") === "true") {
+      setMostrarMensaje(true);
+    }
+  }, []);
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % totalSlides);
-  const prevSlide = () =>
-    setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
-
- 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % totalSlides);
@@ -34,29 +32,15 @@ function Inicio() {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
-  
-useEffect(() => {
-  const auth = getAuth();
+  const nextSlide = () =>
+    setCurrent((prev) => (prev + 1) % totalSlides);
 
-  const unsub = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const yaMostrado = sessionStorage.getItem("mensajeBienvenida");
-
-      if (!yaMostrado) {
-        setMostrarMensaje(true);
-        sessionStorage.setItem("mensajeBienvenida", "true");
-      }
-    }
-  });
-
-  return () => unsub();
-}, []);
-
+  const prevSlide = () =>
+    setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
 
   return (
     <>
       <main>
-
         {mostrarMensaje && (
           <div
             style={{
@@ -68,14 +52,17 @@ useEffect(() => {
           >
             <div className="bg-pink-100 border border-pink-300 text-pink-700 rounded-xl p-4 shadow-lg relative w-72">
               <button
-                onClick={() => setMostrarMensaje(false)}
-                className="absolute top-2 right-2 w-6 h-6 rounded-full bg-pink-200 hover:bg-pink-300 flex items-center justify-center font-bold"
+                onClick={() => {
+                  setMostrarMensaje(false);
+                  sessionStorage.removeItem("mensajeBienvenida");
+                }}
+                className="absolute top-2 right-2 w-6 h-6 rounded-full bg-pink-200 flex items-center justify-center font-bold"
               >
                 ×
               </button>
-              <p className="font-semibold">Ya iniciaste sesión 💖</p>
+              <p className="font-semibold">Ya iniciaste sesión</p>
               <p className="text-sm">
-                Disfruta y despeja tu mente del mundo.
+                Disfruta y despeja tu mente del mundo
               </p>
             </div>
           </div>
@@ -86,8 +73,8 @@ useEffect(() => {
             <div className="hero-text">
               <h1>Bienvenida a tu pausa del mundo</h1>
               <p>
-                Un espacio seguro para sentir, conversar y sanar poquito a
-                poquito
+                Un espacio seguro para sentir, conversar y sanar
+                poquito a poquito
               </p>
             </div>
 
@@ -100,7 +87,7 @@ useEffect(() => {
             >
               {slidesData.map((slide, index) => (
                 <div key={index} className="slide">
-                  <img src={slide.img} alt={`slide ${index + 1}`} />
+                  <img src={slide.img} alt="" />
                 </div>
               ))}
             </div>
@@ -114,60 +101,61 @@ useEffect(() => {
           </button>
         </section>
 
-
         <section className="caracteristicas">
-          <h3 className="objetivos-container">¿Qué encontrarás aquí?</h3>
+          <h3 className="objetivos-container">
+            ¿Qué encontrarás aquí?
+          </h3>
 
           <div className="grid-cards">
             <div className="caracteristica">
               <h6>✦ Un espacio para desahogarse</h6>
-              <p>Expresar lo que sentimos, todo vale.</p>
+              <p>Todo lo que sientes importa.</p>
             </div>
 
             <div className="caracteristica">
               <h6>✦ Conectar de verdad</h6>
-              <p>Aquí puedes hacer amigas que te entiendan.</p>
+              <p>Amigas que te entienden sin juzgar.</p>
             </div>
 
             <div className="caracteristica">
               <h6>✦ Tips para todas</h6>
-              <p>Consejitos de estudio y autocuidado.</p>
+              <p>Autocuidado, estudio y paz mental.</p>
             </div>
 
             <div className="caracteristica">
               <h6>✦ Crecer juntas</h6>
-              <p>Un mal día jamás te define.</p>
+              <p>No estás sola.</p>
             </div>
           </div>
         </section>
 
-
         <section className="services">
           <h3>
             Visión & Misión <br />
-            <span>Un refugio digital hecho por y para chicas</span>
+            <span>
+              Un refugio digital hecho por y para chicas
+            </span>
           </h3>
 
           <div className="cards">
             <div className="ision">
               <h3>❀ Visión ❀</h3>
               <p>
-                Construir un espacio donde cada chica se sienta segura,
-                escuchada y acompañada.
+                Crear un espacio seguro donde cada chica se
+                sienta escuchada y acompañada.
               </p>
             </div>
 
             <div className="ision">
               <h3>☼ Misión ☼</h3>
               <p>
-                Ofrecer un lugar para desahogarse, aprender y conectar con otras
-                chicas que te entienden.
+                Ofrecer apoyo, autocuidado y conexión real
+                entre chicas.
               </p>
             </div>
           </div>
         </section>
       </main>
-
 
       <section className="team">
         <h3 className="qs">¿Quiénes somos?</h3>
@@ -177,13 +165,15 @@ useEffect(() => {
             <h4>YEIMI ORTIZ</h4>
             <p>Diseñadora</p>
           </div>
+
           <div className="member">
             <img src={mari} alt="" />
             <h4>MARINA SANTANA</h4>
             <p>Programadora</p>
           </div>
+
           <div className="member">
-            <img src={daira} alt="" />
+            <img src={mari} alt="" />
             <h4>DAIRA CRUZ</h4>
             <p>Diseñadora</p>
           </div>
