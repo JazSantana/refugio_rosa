@@ -69,7 +69,7 @@ return (
   <h3 className="titulo"> ⚜ Mi Agenda Personal ⚜<br />
           </h3>            
           <div className="subt">{"Guarda aquí los pendientes que no quieres olvidar."}</div>
-  <div className="min-h-screen w-full flex items-center justify-center  px-4 fondo-pendientes">
+  <div className="w-full flex items-center justify-center  px-4 fondo-pendientes m-10">
     <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8">
 
     

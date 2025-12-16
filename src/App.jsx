@@ -12,7 +12,6 @@ import RegistrarUsuario from "./components/RegistrarUsuario";
 import Login from "./components/Login";
 import Pendientes from "./pages/Pendientes";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Campaña from "./pages/Campaña";
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
@@ -34,7 +33,8 @@ function App() {
   return (
     <>
       <Header usuario={usuarioRegistrado} />
-
+       {/* 🐾 Mascota fija en la esquina */}
+    <Mascota />
       <Routes>
         <Route path="/" element={<Inicio usuario={usuarioRegistrado} />} />
         <Route path="/campaña" element={<Campaña usuario={usuarioRegistrado}/>}></Route>
