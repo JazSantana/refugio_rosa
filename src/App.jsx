@@ -11,6 +11,7 @@ import Playlist from "./pages/Playlist";
 import RegistrarUsuario from "./components/RegistrarUsuario";
 import Login from "./components/Login";
 import Pendientes from "./pages/Pendientes";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
@@ -40,10 +41,12 @@ function App() {
         <Route
           path="/pendiente"
           element={
+            <ProtectedRoute>
             <Pendientes
               usuarioData={usuarioRegistrado}
               actualizarUsuario={setUsuarioRegistrado}
             />
+            </ProtectedRoute>
           }
         />
         <Route path="/playlist" element={<Playlist />} />

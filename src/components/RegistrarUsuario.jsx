@@ -9,20 +9,29 @@ import {
 function RegistrarUsuario({ OnRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [apodo, setApodo] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const registrar = async () => {
-    const auth = getAuth();
+    setError("");
+
+    if (!email || !password || !apodo) {
+      setError("Completa todos los campos");
+      return;
+    }
 
     if (password.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
+      setError("La contraseña debe tener al menos 6 caracteres");
       return;
     }
 
     try {
+      setLoading(true);
+      const auth = getAuth();
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -37,36 +46,36 @@ function RegistrarUsuario({ OnRegister }) {
 
       await user.reload();
 
-      console.log("Cuenta creada con éxito");
-      console.log("DisplayName guardado:", user.displayName);
-
-      OnRegister(auth.currentUser);
-      navigate("/"); 
+      OnRegister?.(auth.currentUser);
+      navigate("/");
     } catch (error) {
-      console.log("Error al registrar");
-      console.log(error);
+      if (error.code === "auth/email-already-in-use") {
+        setError("Este correo ya está registrado");
+      } else if (error.code === "auth/invalid-email") {
+        setError("El correo no es válido");
+      } else {
+        setError("Error al registrar usuario");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-rose-100 to-white p-6">
-      <div className="bg-white/70 backdrop-blur-sm shadow-xl rounded-2xl p-8 w-full max-w-md border border-pink-200 space-y-4 mt-0">
-        <h1 className="text-3xl font-bold text-pink-600 text-center mb-6">
+      <div className="bg-white/70 backdrop-blur-sm shadow-xl rounded-2xl p-8 w-full max-w-md border border-pink-200 space-y-4">
+        <h1 className="text-3xl font-bold text-pink-600 text-center mb-4">
           Registrar Usuario
         </h1>
 
-        <input
-          className="w-full p-3 border border-pink-300 rounded-xl"
-          type="text"
-          placeholder="Escribe tu nombre completo"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        {error && (
+          <p className="text-red-500 text-sm text-center">{error}</p>
+        )}
 
         <input
           className="w-full p-3 border border-pink-300 rounded-xl"
           type="text"
-          placeholder="Escribe como quieres que te llamemos"
+          placeholder="¿Cómo quieres que te llamemos?"
           value={apodo}
           onChange={(e) => setApodo(e.target.value)}
         />
@@ -74,7 +83,7 @@ function RegistrarUsuario({ OnRegister }) {
         <input
           className="w-full p-3 border border-pink-300 rounded-xl"
           type="email"
-          placeholder="Escribe tu Email"
+          placeholder="Escribe tu email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -88,10 +97,13 @@ function RegistrarUsuario({ OnRegister }) {
         />
 
         <button
-          className="w-full mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-xl"
+          className={`w-full mt-4 text-white font-semibold py-3 rounded-xl transition
+            ${loading ? "bg-gray-400" : "bg-pink-500 hover:bg-pink-600"}
+          `}
           onClick={registrar}
+          disabled={loading}
         >
-          Registrarse
+          {loading ? "Creando cuenta..." : "Registrarse"}
         </button>
 
         <div className="text-center mt-4">

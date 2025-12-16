@@ -47,7 +47,7 @@ function Pendientes() {
     return ObtenerTareas;
   }, []);
 
-  // --- Editar tarea ---
+ 
   const editarTarea = async (id) => {
     const tareaRef = doc(db, "tareas", id);
     await updateDoc(tareaRef, {
@@ -57,7 +57,6 @@ function Pendientes() {
     setEditandoID(null);
   };
 
-  // --- Eliminar tarea ---
   const eliminarTarea = async (id) => {
     const confirmar = window.confirm("¿Confirmar eliminación?");
     if (confirmar) {
@@ -70,10 +69,10 @@ return (
   <h3 className="titulo"> ⚜ Mi Agenda Personal ⚜<br />
           </h3>            
           <div className="subt">{"Guarda aquí los pendientes que no quieres olvidar."}</div>
-  <div className="min-h-screen w-full flex items-center justify-center py-10 px-4 fondo-pendientes">
+  <div className="min-h-screen w-full flex items-center justify-center  px-4 fondo-pendientes">
     <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      {/* --- Formulario --- */}
+    
       <div className="contenedor-formulario p-8 rounded-2xl shadow-lg">
         <h1 className="titulo-principal text-center mb-6">Añadir Pendiente</h1>
 

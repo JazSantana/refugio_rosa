@@ -12,42 +12,69 @@ const provider = new GoogleAuthProvider();
 function Login({ OnLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const iniciarSesion = async () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        OnLogin(user);
-        navigate("/"); 
-      })
-      .catch((error) => {
-        console.log("Error al iniciar sesión");
-        console.log(error);
-      });
-  };
+  setError("");
 
-  const iniciarSesionGoogle = async () => {
+  if (!email || !password) {
+    setError("Completa todos los campos");
+    return;
+  }
+
+  if (password.length < 8) {
+    setError("La contraseña debe tener al menos 8 caracteres");
+    return;
+  }
+
+  try {
+    setLoading(true);
     const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        OnLogin(user);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("Error al iniciar con Google");
-        console.log(error);
-      });
-  };
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user = userCredential.user;
+    OnLogin(user);
+    navigate("/");
+  } catch (error) {
+    setError("Correo o contraseña incorrectos");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+const iniciarSesionGoogle = async () => {
+  try {
+    setLoading(true);
+    const auth = getAuth();
+    const result = await signInWithPopup(auth, provider);
+    OnLogin(result.user);
+    navigate("/");
+  } catch (error) {
+    setError("Error al iniciar sesión con Google");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="bg-white/70 backdrop-blur-sm shadow-xl rounded-2xl p-8 w-full max-w-md border border-pink-200 space-y-4">
-        <h1 className="text-3xl font-bold text-pink-600 text-center mb-6">
+        <h1 className="text-3xl font-bold text-pink-600 text-center mb-4">
           Iniciar Sesión
         </h1>
+        {error && (
+  <p className="text-red-500 text-sm text-center ">
+    {error}
+  </p>
+)}
         <label className="block text-sm font-medium text-gray-700 mb-1">Correo Electronico</label>
         <input
           type="email"
@@ -66,12 +93,17 @@ function Login({ OnLogin }) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button
-          className="w-full mt-4 bg-pink-500 text-white rounded-xl p-3"
-          onClick={iniciarSesion}
-        >
-          Iniciar sesión
-        </button>
+       <button
+  className={`w-full mt-4 rounded-xl p-3 text-white transition
+    ${loading ? "bg-gray-400" : "bg-pink-500 hover:bg-pink-600"}
+  `}
+  onClick={iniciarSesion}
+  disabled={loading}
+>
+  {loading ? "Ingresando..." : "Iniciar sesión"}
+</button>
+
+
 
         <button
           className="w-full mt-2 border border-pink-500 rounded-xl p-3"
