@@ -100,6 +100,7 @@ function Inicio() {
             &#10095;
           </button>
         </section>
+        
 
         <section className="caracteristicas">
           <h3 className="objetivos-container">
@@ -141,16 +142,14 @@ function Inicio() {
             <div className="ision">
               <h3>❀ Visión ❀</h3>
               <p>
-                Crear un espacio seguro donde cada chica se
-                sienta escuchada y acompañada.
+                Queremos construir un espacio digital donde cada chica pueda sentirse segura, escuchada y acompañada. Soñamos con una comunidad que inspire confianza y empatía, donde compartir emociones, ideas y experiencias sea natural, y donde el apoyo mutuo nos recuerde que juntas podemos crecer, aprender y brillar sin miedo a ser quienes somos.
               </p>
             </div>
 
             <div className="ision">
               <h3>☼ Misión ☼</h3>
               <p>
-                Ofrecer apoyo, autocuidado y conexión real
-                entre chicas.
+                Nuestra misión es ofrecer un lugar cercano y accesible, pensado para adolescentes y jóvenes que buscan un refugio en medio del día a día. Aquí podrás desahogarte, encontrar tips de autocuidado, descubrir historias motivadoras y conectar con otras chicas que te entienden. Queremos recordarte que no estás sola, que tu voz importa y que siempre habrá alguien dispuesto a escucharte y acompañarte en tu camino.
               </p>
             </div>
           </div>

@@ -1,0 +1,74 @@
+.campaña-page {
+  padding: 40px 20px;
+  font-family: "Open Sans", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.campaña-header {
+  text-align: center;
+  background-color: #ffe4f0;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+
+.campaña-header h1 {
+  color: #db2777;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.campaña-header p {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  background-color: #f43f5e;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta-btn:hover {
+  background-color: #e11d48;
+}
+
+.campaña-detalles {
+  display: grid;
+  gap: 30px;
+}
+
+.campaña-info h2 {
+  color: #db2777;
+  margin-bottom: 10px;
+}
+
+.campaña-info p {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.campaña-banner {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.campaña-banner img {
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .campaña-detalles {
+    display: block;
+  }
+}

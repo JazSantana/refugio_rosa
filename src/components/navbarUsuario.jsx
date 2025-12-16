@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import "./Header.css";
 
@@ -27,29 +27,44 @@ function NavbarUsuario({ usuario }) {
         </label>
 
         <ul className="nav-links">
-          <li><Link to="/" className="active">Inicio</Link></li>
-          <li><Link to="/chat">Chat</Link></li>
-          <li><Link to="/autocuidado">Autocuidado</Link></li>
-          <li><Link to="/playlist">Playlist</Link></li>
-          {usuario && (
-            <li><Link to="/pendiente">Pendientes</Link></li>
-          )}
-          <li className="usuario-nombre" style={{ color: "#D21E63" }}>
+          <li>
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+              Inicio
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/campaña" className={({ isActive }) => (isActive ? "active" : "")}>Campaña</NavLink>
+          </li>
+          <li>
+            <NavLink to="/pendiente" className={({ isActive }) => (isActive ? "active" : "")}>
+              Pendientes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/chat" className={({ isActive }) => (isActive ? "active" : "")}>
+              Chat
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/autocuidado" className={({ isActive }) => (isActive ? "active" : "")}>
+              Autocuidado
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/playlist" className={({ isActive }) => (isActive ? "active" : "")}>
+              Playlist
+            </NavLink>
+          </li>
+          <li className="text-rose-600 font-semibold">
             Hola, {usuario.displayName}
           </li>
-          <li 
-            onClick={cerrarSesion} 
-            style={{ 
-              cursor: "pointer", 
-              fontWeight: "bold", 
-              backgroundColor: "#F06292", 
-              color: "white", 
-              padding: "6px 12px", 
-              borderRadius: "8px", 
-              fontSize: "14px" // Tamaño de la fuente más pequeño
-            }}
-          >
-            Cerrar sesión
+          <li>
+            <button
+              onClick={cerrarSesion}
+              className="px-3 py-1 text-sm bg-rose-500 text-white rounded-md hover:bg-rose-600 transition"
+            >
+              Cerrar sesión
+            </button>
           </li>
         </ul>
       </nav>
