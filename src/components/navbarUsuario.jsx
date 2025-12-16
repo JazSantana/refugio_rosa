@@ -1,32 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
 import "./Header.css";
 
-function NavbarUsuario() {
-  const auth = getAuth();
+function NavbarUsuario({ usuario }) {
   const navigate = useNavigate();
-  const [usuario, setUsuario] = useState(null);
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUsuario(user); 
-      } else {
-        setUsuario(null);
-      }
-    });
-
-    return () => unsub();
-  }, [auth]);
+  const auth = getAuth();
 
   const cerrarSesion = async () => {
     await signOut(auth);
     sessionStorage.removeItem("mensajeBienvenida");
     navigate("/");
   };
-
-  const nombre = usuario?.displayName || "Invitada";
 
   return (
     <header>
@@ -43,21 +27,27 @@ function NavbarUsuario() {
         </label>
 
         <ul className="nav-links">
-          <li className="usuario-nombre">Hola, {nombre}</li>
-
-          <li>
-            <Link to="/chat">Chat</Link>
+          <li><Link to="/" className="active">Inicio</Link></li>
+          <li><Link to="/chat">Chat</Link></li>
+          <li><Link to="/autocuidado">Autocuidado</Link></li>
+          <li><Link to="/playlist">Playlist</Link></li>
+          {usuario && (
+            <li><Link to="/pendiente">Pendientes</Link></li>
+          )}
+          <li className="usuario-nombre" style={{ color: "#D21E63" }}>
+            Hola, {usuario.displayName}
           </li>
-          <li>
-            <Link to="/autocuidado">Autocuidado</Link>
-          </li>
-          <li>
-            <Link to="/playlist">Playlist</Link>
-          </li>
-
-          <li
-            onClick={cerrarSesion}
-            style={{ cursor: "pointer", fontWeight: "bold" }}
+          <li 
+            onClick={cerrarSesion} 
+            style={{ 
+              cursor: "pointer", 
+              fontWeight: "bold", 
+              backgroundColor: "#F06292", 
+              color: "white", 
+              padding: "6px 12px", 
+              borderRadius: "8px", 
+              fontSize: "14px" // Tamaño de la fuente más pequeño
+            }}
           >
             Cerrar sesión
           </li>

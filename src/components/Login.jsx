@@ -67,11 +67,11 @@ const iniciarSesionGoogle = async () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="bg-white/70 backdrop-blur-sm shadow-xl rounded-2xl p-8 w-full max-w-md border border-pink-200 space-y-4">
-        <h1 className="text-3xl font-bold text-pink-600 text-center mb-4">
+        <h1 className="text-3xl font-bold text-pink-600 text-center mb-6">
           Iniciar Sesión
         </h1>
         {error && (
-  <p className="text-red-500 text-sm text-center ">
+  <p className="text-red-500 text-sm text-center mt-2">
     {error}
   </p>
 )}
