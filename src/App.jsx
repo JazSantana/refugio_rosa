@@ -12,6 +12,8 @@ import RegistrarUsuario from "./components/RegistrarUsuario";
 import Login from "./components/Login";
 import Pendientes from "./pages/Pendientes";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Mascota from "./pages/Mascota";
+
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
@@ -34,6 +36,8 @@ function App() {
   return (
     <>
       <Header usuario={usuarioRegistrado} />
+       {/* 🐾 Mascota fija en la esquina */}
+    <Mascota />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/chat" element={<Chat usuario={usuarioRegistrado} />} />
