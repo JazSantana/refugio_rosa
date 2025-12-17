@@ -1,8 +1,10 @@
-
-.fondo-pendientes {
-  background: rgb(250, 230, 230); /* rosado suave */
+body {
+  overflow-x: hidden;
 }
 
+.fondo-pendientes {
+  background: rgb(250, 230, 230);
+}
 
 .titulo-principal {
   font-family: "Pacifico", cursive;
@@ -10,21 +12,18 @@
   font-size: 28px;
 }
 
-/* Contenedor del formulario */
 .contenedor-formulario {
   background: #ffffff;
   border: 1px solid #da5f96;
   border-radius: 20px;
 }
 
-/* Contenedor de lista */
 .contenedor-lista {
   background: #ffffff;
   border: 1px solid #da5f96;
   border-radius: 20px;
 }
 
-/* Inputs y textarea */
 .input-estilos {
   border: 1px solid #da5f96;
   background: #ffe3ee;
@@ -36,7 +35,6 @@
   box-shadow: 0 0 5px #db2777;
 }
 
-/* Botón agregar */
 .btn-agregar {
   background: #db2777;
   color: white;
@@ -49,7 +47,6 @@
   background: #b91c68;
 }
 
-/* Item de la lista */
 .tarea-item {
   background: #ffe3ee;
   border: 1px solid #da5f96;
@@ -62,7 +59,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos de texto */
 .tarea-materia {
   font-weight: bold;
   color: #db2777;
@@ -75,7 +71,6 @@
   font-size: 16px;
 }
 
-/* Botones editar, guardar, eliminar */
 .btn-editar {
   background: #db2777;
   color: white;
@@ -112,4 +107,50 @@
 
 .btn-cancelar:hover {
   background: #4b5563;
+}
+
+@media (max-width: 768px) {
+  .fondo-pendientes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .contenedor-formulario,
+  .contenedor-lista {
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+
+  .titulo-principal {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .input-estilos,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-agregar {
+    width: 100%;
+  }
+
+  .tarea-item {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-editar,
+  .btn-eliminar,
+  .btn-guardar,
+  .btn-cancelar {
+    width: 100%;
+    margin-top: 6px;
+  }
 }

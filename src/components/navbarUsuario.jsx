@@ -32,9 +32,7 @@ function NavbarUsuario({ usuario }) {
               Inicio
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/campania" className={({ isActive }) => (isActive ? "active" : "")}>Campaña</NavLink>
-          </li>
+  
           <li>
             <NavLink to="/pendiente" className={({ isActive }) => (isActive ? "active" : "")}>
               Pendientes
