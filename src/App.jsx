@@ -12,6 +12,9 @@ import RegistrarUsuario from "./components/RegistrarUsuario";
 import Login from "./components/Login";
 import Pendientes from "./pages/Pendientes";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Mascota from "./pages/Mascota";
+
+import Campaña from "./pages/Campaña";
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
