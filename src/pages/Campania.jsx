@@ -64,6 +64,7 @@ function Campania() {
     y sostenerte en los días difíciles.  
     Aquí, tu sentir siempre tiene un lugar.
   </p>
+  <img src="src/assets/banner1.jpeg" alt="" />
 </section>
 
  <section className="campania-social">
