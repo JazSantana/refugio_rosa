@@ -13,8 +13,8 @@ import Login from "./components/Login";
 import Pendientes from "./pages/Pendientes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Mascota from "./pages/Mascota";
+import Campania from "./pages/Campania"
 
-import Campaña from "./pages/Campaña";
 
 function App() {
   const [usuarioRegistrado, setUsuarioRegistrado] = useState(null);
@@ -40,7 +40,7 @@ function App() {
     <Mascota />
       <Routes>
         <Route path="/" element={<Inicio usuario={usuarioRegistrado} />} />
-        <Route path="/campaña" element={<Campaña usuario={usuarioRegistrado}/>}></Route>
+        <Route path="/campania" element={<Campania usuario={usuarioRegistrado}/>}></Route>
         <Route path="/chat" element={<Chat usuario={usuarioRegistrado} />} />
         <Route path="/autocuidado" element={<Autocuidado />} />
         <Route
