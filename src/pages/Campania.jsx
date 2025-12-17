@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import campañaImg from "../assets/campaña.jpg";
+import "./Campania.css";
 
-function Campaña() {
+
+function Campania() {
   const navigate = useNavigate();
 
   return (
-    <main className="campaña-page">
-      <section className="campaña-header">
+    <main className="campania-page">
+      <section className="campania-header">
         <h1>¡Bienvenida a Refugio Rosa!</h1>
         <p>
           Un espacio seguro pensado para chicas adolescentes y jóvenes que buscan
@@ -20,8 +21,8 @@ function Campaña() {
         </button>
       </section>
 
-      <section className="campaña-detalles">
-        <div className="campaña-info">
+      <section className="campania-detalles">
+        <div className="campania-info">
           <h2>¿A quién va dirigido?</h2>
           <p>
             Nuestra campaña está dirigida a chicas entre 13 y 18 años que buscan un
@@ -31,7 +32,7 @@ function Campaña() {
           </p>
         </div>
 
-        <div className="campaña-info">
+        <div className="campania-info">
           <h2>Propuesta de valor</h2>
           <p>
             Refugio Rosa ofrece un espacio seguro, interactivo y accesible, donde
@@ -41,7 +42,7 @@ function Campaña() {
           </p>
         </div>
 
-        <div className="campaña-info">
+        <div className="campania-info">
           <h2>Promoción</h2>
           <p>
             Durante el lanzamiento, las nuevas usuarias recibirán contenido
@@ -50,12 +51,12 @@ function Campaña() {
           </p>
         </div>
 
-        <div className="campaña-banner">
-          <img src={campañaImg} alt="Campaña Refugio Rosa" />
+        <div className="campania-banner">
+          <img alt="Campania Refugio Rosa" />
         </div>
       </section>
     </main>
   );
 }
 
-export default Campaña;
+export default Campania;

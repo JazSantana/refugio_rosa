@@ -27,7 +27,7 @@ function NavbarVisitante() {
                            </NavLink>
                          </li>
                          <li>
-                          <Link to="/campaña">Campaña</Link>
+                          <Link to="/campania">Campaña</Link>
                          </li>
                          <li>
                            <Link to="/chat">Chat</Link>

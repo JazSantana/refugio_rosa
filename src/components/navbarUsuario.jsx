@@ -33,7 +33,7 @@ function NavbarUsuario({ usuario }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/campaña" className={({ isActive }) => (isActive ? "active" : "")}>Campaña</NavLink>
+            <NavLink to="/campania" className={({ isActive }) => (isActive ? "active" : "")}>Campaña</NavLink>
           </li>
           <li>
             <NavLink to="/pendiente" className={({ isActive }) => (isActive ? "active" : "")}>
